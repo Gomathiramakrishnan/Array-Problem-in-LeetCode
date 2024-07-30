@@ -1,0 +1,36 @@
+Chocolate wrappers 10
+
+public class ChocolateFeast {
+
+    public static void main(String[] args) {
+        int money = 40;
+        int price = 1;
+        int wrappersNeeded = 3;
+        int chocoForWrappers = 1;
+        int maxVisit = 1; // if zero consider it infinite
+        
+        int result[] = calculateChocolates(money, price, wrappersNeeded, chocoForWrappers, maxVisit);
+        System.out.println("Total chocolates can eat: " + result[0]);
+        System.out.println("Wrappers left in hand: " + result[1]);
+    }
+
+    public static int[] calculateChocolates(int money, int price, int wrappersNeeded, int chocoForWrappers, int maxVisit) {
+        int chocolates = money / price;
+        int wrappers = chocolates;
+
+        int visits = 1;
+        while (wrappers >= wrappersNeeded && (maxVisit == 0 || visits < maxVisit)) {
+            int additionalChocolates = wrappers / wrappersNeeded * chocoForWrappers;
+            chocolates += additionalChocolates;
+            wrappers = wrappers % wrappersNeeded + additionalChocolates;
+            visits++;
+        }
+
+        return new int[]{chocolates, wrappers};
+    }
+}
+
+
+Op
+Total chocolates can eat: 53
+Wrappers left in hand: 14
